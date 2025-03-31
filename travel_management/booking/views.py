@@ -1,5 +1,4 @@
-from typing import dataclass_transform
-from django.contrib.auth import authenticate, login,
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.decorators import login_required
@@ -29,7 +28,6 @@ def sign_up(request):
     return render(request, "booking/signup.html", context={"form": form})
 
 
-
 def user_login(request):
     if request.method == "POST":
         form = LoginForm(request, data=request.POST)
@@ -46,7 +44,7 @@ def user_login(request):
                 return redirect("home")
     else:
         form = LoginForm()
-    return render(request, "booking/login.html",context={"form":form})
+    return render(request, "booking/login.html", context={"form": form})
 
 
 def route_list(request):
@@ -67,9 +65,9 @@ def buses_on_route(request, route_id):
 
 
 @login_required
-def book_ticket(request,route_id):
+def book_ticket(request, route_id):
     route_map = RouteBusMap.objects.filter(route=route_id).first()
-    data = {"data":route_map}
+    data = {"data": route_map}
     if request.method == "POST":
         route_id = request.POST.get("route_id")
         number_of_seats = request.POST.get("number_of_seats", 0)
@@ -78,11 +76,17 @@ def book_ticket(request,route_id):
         if route_map:
             seats_booked = route_map.seats_booked(number_of_seats)
             if seats_booked:
-                total_price = calculate_route_fare(number_of_seats, route_map.ticket_price)
+                total_price = calculate_route_fare(
+                    number_of_seats, route_map.ticket_price
+                )
                 ticket = Ticket.objects.create(
                     user=request.user, route=route_map, seat_number=1, price=total_price
                 )
-                return render(request, "booking/ticket_booked.html", context={"data": ticket})
-            return render(request, "booking/not_enough_seats.html", context={"data": route_map})
+                return render(
+                    request, "booking/ticket_booked.html", context={"data": ticket}
+                )
+            return render(
+                request, "booking/not_enough_seats.html", context={"data": route_map}
+            )
 
-    return render(request, "booking/book_ticket.html",context=data)
+    return render(request, "booking/book_ticket.html", context=data)
