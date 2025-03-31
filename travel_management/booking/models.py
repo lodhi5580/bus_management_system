@@ -30,7 +30,10 @@ class RouteBusMap(models.Model):
 
     def seats_booked(self, no_seats):
         self.available_seats = self.available_seats - no_seats
+        if self.available_seats < 0:
+            return False
         self.save()
+        return True
 
     def __str__(self):
         return f"{self.bus.name} - {self.route.source} - {self.route.destination}"

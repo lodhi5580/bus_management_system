@@ -76,10 +76,13 @@ def book_ticket(request,route_id):
 
         route_map = RouteBusMap.objects.filter(route=route_id)
         if route_map:
-            total_price = calculate_route_fare(number_of_seats, route_map.ticket_price)
-            ticket = Ticket.objects.create(
-                user=request.user, route=route_map, seat_number=1, price=total_price
-            )
-            return render(request, "booking/ticket_booked.html", context={"data": ticket})
+            seats_booked = route_map.seats_booked(number_of_seats)
+            if seats_booked:
+                total_price = calculate_route_fare(number_of_seats, route_map.ticket_price)
+                ticket = Ticket.objects.create(
+                    user=request.user, route=route_map, seat_number=1, price=total_price
+                )
+                return render(request, "booking/ticket_booked.html", context={"data": ticket})
+            return render(request, "booking/not_enough_seats.html", context={"data": route_map})
 
     return render(request, "booking/book_ticket.html",context=data)
