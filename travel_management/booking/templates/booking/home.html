@@ -1,0 +1,10 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="text-center" style="background: linear-gradient(to right, #6a11cb, #2575fc); color: white; padding: 50px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <h1 style="font-size: 3rem; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">Welcome to Travel Management System</h1>
+    <p style="font-size: 1.5rem; margin-bottom: 30px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">Book your bus tickets easily and conveniently.</p>
+    <a href="/allroutes" class="btn btn-primary" style="font-size: 1.2rem; padding: 10px 20px; border-radius: 5px; background-color: #007bff; border: none; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);" onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#007bff'; this.style.transform='scale(1)';">
+        View Routes
+    </a>
+</div>
+{% endblock %}

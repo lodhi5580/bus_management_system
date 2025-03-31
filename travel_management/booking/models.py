@@ -4,8 +4,8 @@ from django.db import models
 
 class Bus(models.Model):
     name = models.CharField(max_length=100)
-    capacity = models.IntegerField()
-    bus_no = models.CharField(max_length=100)
+    capacity = models.IntegerField(null=True)
+    bus_no = models.CharField(max_length=100,null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -29,6 +29,8 @@ class RouteBusMap(models.Model):
     ticket_price = models.FloatField(null=True, blank=True)
 
     def seats_booked(self, no_seats):
+        if isinstance(no_seats, str):
+            no_seats = int(no_seats)
         self.available_seats = self.available_seats - no_seats
         if self.available_seats < 0:
             return False
@@ -44,7 +46,7 @@ class Ticket(models.Model):
     route = models.ForeignKey(RouteBusMap, on_delete=models.CASCADE)
     seat_number = models.IntegerField()
     booking_date = models.DateTimeField(auto_now_add=True)
-    price = models.FloatField()
+    price = models.FloatField(null=True)
 
     def __str__(self):
         return f"Ticket {self.id} for {self.user.username}"

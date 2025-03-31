@@ -1,0 +1,16 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px; padding: 20px; background: linear-gradient(to right, #6a11cb, #2575fc); color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <h2 class="text-center" style="font-weight: bold; margin-bottom: 20px;">Ticket Confirmation</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">Thank you for booking with us. Your ticket details:</p>
+    <ul class="list-group">
+        <li class="list-group-item">Ticket ID: {{ data.id }}</li>
+        <li class="list-group-item">User: {{ data.user.username }}</li>
+        <li class="list-group-item">Route: {{ data.route.route.source }} to {{ data.route.route.destination }}</li>
+        <li class="list-group-item">Price: ${{ data.price }}</li>
+        <li class="list-group-item">No. of Seats: {{ data.seat_number }}</li>
+        <li class="list-group-item">No. of Person: {{ data.seat_number }}</li>
+    </ul>
+    <a href="/user_tickets" class="btn btn-secondary mt-3 w-100" style="font-size: 1.2rem; padding: 10px; border-radius: 5px; background-color: #007bff; border: none; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#007bff'; this.style.transform='scale(1)';">View My Tickets</a>
+</div>
+{% endblock %}

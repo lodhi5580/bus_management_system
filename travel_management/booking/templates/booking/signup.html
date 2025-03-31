@@ -1,0 +1,13 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="card mx-auto" style="max-width: 400px; padding: 20px; background: linear-gradient(to right, #6a11cb, #2575fc); color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <div class="card-body">
+        <h2 class="text-center" style="font-weight: bold; margin-bottom: 20px;">Sign Up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100" style="font-size: 1.2rem; padding: 10px; border-radius: 5px; background-color: #007bff; border: none; text-transform: uppercase; transition: background-color 0.3s, transform 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)';" onmouseout="this.style.backgroundColor='#007bff'; this.style.transform='scale(1)';">Register</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

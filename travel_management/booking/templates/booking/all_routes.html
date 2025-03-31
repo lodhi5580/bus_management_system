@@ -1,0 +1,20 @@
+{% extends 'booking/base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="text-center" style="font-weight: bold; margin-bottom: 20px;">Available Routes</h2>
+    <div class="row">
+        {% for route in data %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px;">
+                <div class="card-body" style="background: linear-gradient(to right, #4facfe, #00f2fe); color: white; border-radius: 10px;">
+                    <h5 class="card-title" style="font-weight: bold;">{{ route.source }} to {{ route.destination }}</h5>
+                    <p class="card-text">Departure: {{ route.departure_time }}</p>
+                    <p class="card-text">Arrival: {{ route.arrival_time }}</p>
+                    <a href="/busroute/{{ route.id }}" class="btn btn-info w-100" style="font-size: 1rem; padding: 10px; border-radius: 5px;">View Buses</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

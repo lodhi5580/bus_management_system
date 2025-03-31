@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            flex: 1;
+        }
+        .footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Travel Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/allroutes">Routes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/user_tickets">My Tickets</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/signup">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+<footer class="footer mt-4" style="background: linear-gradient(to right, #4facfe, #00f2fe); color: white; padding: 20px; text-align: center; box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);">
+    <div class="container">
+        <p style="margin: 0; font-size: 1.2rem; font-weight: bold;">&copy; 2025 Travel Management System | All Rights Reserved</p>
+        <p style="margin: 5px 0 0; font-size: 1rem;">Follow us on 
+            <a href="#" style="color: white; text-decoration: underline;">Facebook</a>, 
+            <a href="#" style="color: white; text-decoration: underline;">Twitter</a>, 
+            <a href="#" style="color: white; text-decoration: underline;">Instagram</a>
+        </p>
+    </div>
+</footer>
+</html>
